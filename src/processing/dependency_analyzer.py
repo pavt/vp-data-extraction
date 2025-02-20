@@ -1,7 +1,7 @@
 import json
 import base64
 from typing import Dict, List, Optional
-from src.github_api import GitHubAPI
+from src.core.github_api import GitHubAPI
 
 class DependencyAnalyzer:
     def __init__(self, github_api: GitHubAPI):

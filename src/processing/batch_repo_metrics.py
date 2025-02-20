@@ -1,17 +1,18 @@
 import time
 import pandas as pd
 from tqdm import tqdm
-from src.repo_metrics import RepoMetrics
+from src.utils.repo_metrics import RepoMetrics  # ✅ Ruta correcta después del cambio
 
 class BatchRepoMetrics:
     """
     Procesa múltiples repositorios en paralelo para obtener métricas y guarda errores.
     """
 
-    def __init__(self, repo_metrics: RepoMetrics, error_log_path: str = "data/error_log.csv"):
+    def __init__(self, repo_metrics: RepoMetrics, error_log_path: str = "data/logs/error_log_capa_1.csv"):
         self.repo_metrics = repo_metrics
         self.error_log_path = error_log_path
-        self.errors = []  # Lista para almacenar repositorios con errores
+        self.errors = []  # ✅ Inicializar lista de errores
+
 
     def update_repository_metrics(self, df: pd.DataFrame) -> pd.DataFrame:
         """

@@ -6,18 +6,21 @@ from src.config import GITHUB_TOKEN
 GRAPHQL_URL = "https://api.github.com/graphql"
 REST_API_URL = "https://api.github.com"
 
+ 
 class RepoMetrics:
-    """
-    Clase para extraer métricas de un repositorio en GitHub usando REST y GraphQL API.
-    """
-
-    def __init__(self, token: str = GITHUB_TOKEN, rate_limit_pause: float = 1.0):
+    def __init__(self, token: str, rate_limit_pause: float = 1.0):
+        self.token = token
+        self.rate_limit_pause = rate_limit_pause
         self.headers = {
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github.v3+json"
         }
-        self.graphql_headers = {"Authorization": f"Bearer {token}"}
-        self.rate_limit_pause = rate_limit_pause
+        self.graphql_headers = {  # ✅ Agregar GraphQL headers
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        }
+
+
 
     def get_rest_api_data(self, owner: str, repo: str) -> Dict:
         """

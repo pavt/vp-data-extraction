@@ -3,7 +3,7 @@ import time
 import pandas as pd
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from src.dependency_analyzer import DependencyAnalyzer
+from src.processing.dependency_analyzer import DependencyAnalyzer  # ✅
 
 class BatchProcessor:
     def __init__(self, analyzer: DependencyAnalyzer, max_workers: int = 5):

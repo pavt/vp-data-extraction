@@ -1,0 +1,20 @@
+repo_owner,repo_name,Category,Number of Components,Low,Medium,High,Critical,Total Vulnerabilities,CWE Tags,vulnerability-proneness-all,commits,branches,releases,forks,watchers,stargazers,contributors,size,totalIssues,openIssues,totalPullRequests,openPullRequests,codeLines,labels,topics
+10up,action-repo-automator,code review,50,0,0,2,0,2,cwe-020,2.0,30,3,7,4,43,18,5,3775,30,3,30,0,3775000,23," github-actions,  pull-request, automation"
+1password,load-secrets-action,security,21,2,2,0,1,5," cwe-078,  cwe-088,  cwe-200,  cwe-284,  cwe-506, cwe-020",5.0,30,6,11,29,14,208,10,452,30,19,30,3,452000,12," 1password-connect,  github-actions,  secrets-management,  service-accounts, 1password"
+42crunch,api-security-audit-action,testing,94,0,1,0,0,1,cwe-1333,1.0,30,3,3,14,4,33,4,3253,24,0,19,0,3253000,9,nan
+8398a7,action-slack,chat,59,0,1,1,0,2," cwe-918, cwe-200",2.0,30,6,30,134,5,595,25,6527,30,31,30,1,6527000,11," slack,  typescript, github-actions"
+alexsim93,pull-request-analytics-action,monitoring,79,3,1,1,0,5," cwe-200,  cwe-284, cwe-020",5.0,30,5,30,11,3,118,4,1324,30,1,30,0,1324000,10," code-review,  github-actions,  management,  measurements,  pull-request-tracker,  statistics, analytics"
+anmol-baranwal,devtogithub,utilities,2,0,1,0,0,1,cwe-020,1.0,30,2,3,0,2,16,2,731,3,0,2,0,731000,16," dev-api,  devto,  github-action,  github-config,  save,  workflow, actions-workflow"
+apple-actions,download-provisioning-profiles,mobile,48,1,4,4,0,9," cwe-20,  cwe-287,  cwe-327,  cwe-400,  cwe-74,  n/a, cwe-1333",9.0,18,3,3,38,12,75,3,1144,17,8,9,2,1144000,9," apple,  github-actions, actions"
+artiomtr,jest-coverage-report-action,monitoring,348,1,4,14,2,21," cwe-080,  cwe-116,  cwe-1321,  cwe-1333,  cwe-184,  cwe-285,  cwe-367,  cwe-400,  cwe-506,  cwe-674,  cwe-74,  cwe-835,  n/a, cwe-020",21.0,30,16,30,145,4,508,30,15362,30,42,30,4,15362000,13," actions,  annotations,  coverage-reporters,  github-action,  github-actions,  github-actions-ci,  jest,  threshold, action"
+azure,cli,deployment,26,0,0,1,0,1," cwe-378, cwe-377",1.0,30,30,14,54,20,134,21,3931,30,11,30,1,3931000,21,nan
+azure,k8s-deploy,deployment,214,0,0,6,0,6," cwe-377,  cwe-378, cwe-020",6.0,30,30,27,105,21,263,30,31595,30,28,30,4,31595000,23," actions,  azure,  deploy,  github-action,  github-actions,  k8s,  kubernetes, action"
+azure,k8s-lint,code review,17,0,0,0,0,0,nan,0.0,30,19,3,13,16,35,16,19875,30,3,30,2,19875000,19," actions,  azure,  github-action,  github-actions,  k8s,  kubernetes,  lint, action"
+azure,k8s-set-context,deployment,132,0,2,1,1,4," cwe-1333,  cwe-918,  cwe-94, cwe-1321",4.0,30,21,8,35,21,90,21,35689,30,5,30,2,35689000,20," actions,  azure,  github-action,  github-actions,  k8s,  kubeconfig,  kubernetes, action"
+azure,mysql,deployment,44,0,1,3,2,6," cwe-400,  cwe-522,  cwe-730,  cwe-74,  cwe-94, cwe-1333",6.0,30,28,2,11,12,11,15,36618,30,16,30,16,36618000,17,nan
+azure,pipelines,deployment,8,0,0,1,0,1," cwe-080,  cwe-116, cwe-020",1.0,30,26,1,88,12,81,12,3500,30,46,30,19,3500000,18,nan
+balastrong,chess-stats-action,utilities,9,0,2,1,0,3," cwe-434,  cwe-74,  cwe-912, cwe-020",3.0,30,2,5,4,2,22,6,758,20,3,11,0,758000,11," github-actions,  hacktoberfest,  readme, chess"
+betahuhn,deploy-to-vercel-action,deployment,161,0,2,7,1,10," cwe-1321,  cwe-1333,  cwe-173,  cwe-400,  cwe-697,  n/a, cwe-020",10.0,30,7,30,73,4,151,15,1151,30,15,30,6,1151000,16," github-actions-ci,  github-deployment,  pr-preview,  vercel,  vercel-cli,  workflow, github-actions"
+bhacaz,docs-as-code-confluence,utilities,49,0,1,2,0,3," cwe-080,  cwe-116,  cwe-1333, cwe-020",3.0,30,1,9,20,1,39,4,5316,19,3,12,0,5316000,9," confluence,  docs-as-code, actions"
+chocobo1,setup-ccache-action,utilities,83,0,2,11,0,13," cwe-078,  cwe-080,  cwe-088,  cwe-116,  cwe-400,  cwe-730, cwe-020",13.0,30,1,30,4,2,13,2,13895,20,1,9,0,13895000,10," ccache,  cpp,  github-actions, caching"
+circleci-public,trigger-circleci-pipeline-action,deployment,36,0,3,1,0,4," cwe-20,  cwe-200,  cwe-352, cwe-020",4.0,30,13,10,43,13,49,15,447,30,21,30,5,447000,10," ci-cd,  continuous-delivery,  github-action,  github-actions, actions"
