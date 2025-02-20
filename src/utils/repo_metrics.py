@@ -6,34 +6,56 @@ from src.config import GITHUB_TOKEN
 GRAPHQL_URL = "https://api.github.com/graphql"
 REST_API_URL = "https://api.github.com"
 
- 
 class RepoMetrics:
-    def __init__(self, token: str, rate_limit_pause: float = 1.0):
+    def __init__(self, token: str = GITHUB_TOKEN, rate_limit_pause: float = 1.0):
         self.token = token
         self.rate_limit_pause = rate_limit_pause
         self.headers = {
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github.v3+json"
         }
-        self.graphql_headers = {  # ✅ Agregar GraphQL headers
+        self.graphql_headers = {  # ✅ Ahora está definido correctamente
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json"
         }
 
-
+    def fetch_paginated_data(self, url: str) -> list:
+        """
+        Obtiene datos paginados de la API de GitHub, siguiendo el enlace `next`.
+        """
+        results = []
+        while url:
+            response = requests.get(url, headers=self.headers)
+            if response.status_code == 200:
+                results.extend(response.json())  # Agregar los datos actuales
+                # Manejar el header `Link` para seguir la paginación
+                link_header = response.headers.get("Link", "")
+                next_url = None
+                for link in link_header.split(","):
+                    if 'rel="next"' in link:
+                        next_url = link[link.find("<") + 1 : link.find(">")]
+                        break
+                url = next_url  # Continuar con la siguiente página
+            else:
+                print(f"⚠️ Error obteniendo datos: {response.status_code}")
+                break
+        return results
 
     def get_rest_api_data(self, owner: str, repo: str) -> Dict:
         """
-        Obtiene métricas básicas del repositorio desde la API REST de GitHub.
+        Obtiene métricas básicas del repositorio desde la API REST de GitHub con paginación.
         """
         try:
             repo_url = f"{REST_API_URL}/repos/{owner}/{repo}"
-            response = requests.get(repo_url, headers=self.headers)
-            repo_data = response.json()
+            repo_data = requests.get(repo_url, headers=self.headers).json()
+
+            languages_url = f"{REST_API_URL}/repos/{owner}/{repo}/languages"
+            languages_data = self.fetch_paginated_data(languages_url)
 
             return {
                 "network_count": repo_data.get("network_count"),
-                "subscribers_count": repo_data.get("subscribers_count")
+                "subscribers_count": repo_data.get("subscribers_count"),
+                "languages": languages_data  # ✅ Ahora obtenemos TODOS los lenguajes
             }
         except Exception as e:
             print(f"⚠️ Error obteniendo datos REST para {owner}/{repo}: {e}")
@@ -41,7 +63,7 @@ class RepoMetrics:
 
     def get_repo_metrics(self, owner: str, repo: str) -> Optional[Dict]:
         """
-        Obtiene información del repositorio usando GraphQL y REST API.
+        Obtiene información del repositorio usando GraphQL y REST API con paginación.
         """
         query = """
         query($owner: String!, $repo: String!) {
@@ -49,7 +71,7 @@ class RepoMetrics:
             description
             primaryLanguage { name }
             licenseInfo { name }
-            languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+            languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {
               nodes { name }
             }
             stargazers { totalCount }
@@ -59,7 +81,11 @@ class RepoMetrics:
         }
         """
         try:
-            response = requests.post(GRAPHQL_URL, json={"query": query, "variables": {"owner": owner, "repo": repo}}, headers=self.graphql_headers)
+            response = requests.post(
+                GRAPHQL_URL,
+                json={"query": query, "variables": {"owner": owner, "repo": repo}},
+                headers=self.graphql_headers,
+            )
             data = response.json()
 
             if "errors" in data:
@@ -73,7 +99,7 @@ class RepoMetrics:
             repo_data = data["data"]["repository"]
             rest_data = self.get_rest_api_data(owner, repo)
 
-            # Extraer idiomas
+            # Extraer idiomas desde GraphQL
             all_languages = [lang["name"] for lang in repo_data.get("languages", {}).get("nodes", [])]
 
             # Construir diccionario de métricas
@@ -83,7 +109,7 @@ class RepoMetrics:
                 "license_name": repo_data.get("licenseInfo", {}).get("name"),
                 "security_policy_enabled": repo_data.get("isSecurityPolicyEnabled"),
                 "vulnerability_alerts_enabled": repo_data.get("hasVulnerabilityAlertsEnabled"),
-                "stargazers_count": repo_data["stargazers"]["totalCount"] if repo_data.get("stargazers") else 0
+                "stargazers_count": repo_data["stargazers"]["totalCount"] if repo_data.get("stargazers") else 0,
             }
 
             # Agregar datos REST
