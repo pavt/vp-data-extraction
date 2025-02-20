@@ -1,0 +1,20 @@
+repo_owner,repo_name,Category,Number of Components,commits,branches,releases,forks,watchers,stargazers,contributors,size,totalIssues,openIssues,totalPullRequests,openPullRequests,codeLines
+10up,action-repo-automator,code review,50,30,3,7,4,43,18,5,3775,30,3,30,0,3775000
+1password,load-secrets-action,security,21,30,6,11,29,14,208,10,452,30,19,30,3,452000
+42crunch,api-security-audit-action,testing,94,30,3,3,14,4,33,4,3253,24,0,19,0,3253000
+8398a7,action-slack,chat,59,30,6,30,134,5,595,25,6527,30,31,30,1,6527000
+alexsim93,pull-request-analytics-action,monitoring,79,30,5,30,11,3,118,4,1324,30,1,30,0,1324000
+anmol-baranwal,devtogithub,utilities,2,30,2,3,0,2,16,2,731,3,0,2,0,731000
+apple-actions,download-provisioning-profiles,mobile,48,18,3,3,38,12,75,3,1144,17,8,9,2,1144000
+artiomtr,jest-coverage-report-action,monitoring,348,30,16,30,145,4,508,30,15362,30,42,30,4,15362000
+azure,cli,deployment,26,30,30,14,54,20,134,21,3931,30,11,30,1,3931000
+azure,k8s-deploy,deployment,214,30,30,27,105,21,263,30,31595,30,28,30,4,31595000
+azure,k8s-lint,code review,17,30,19,3,13,16,35,16,19875,30,3,30,2,19875000
+azure,k8s-set-context,deployment,132,30,21,8,35,21,90,21,35689,30,5,30,2,35689000
+azure,mysql,deployment,44,30,28,2,11,12,11,15,36618,30,16,30,16,36618000
+azure,pipelines,deployment,8,30,26,1,88,12,81,12,3500,30,46,30,19,3500000
+balastrong,chess-stats-action,utilities,9,30,2,5,4,2,22,6,758,20,3,11,0,758000
+betahuhn,deploy-to-vercel-action,deployment,161,30,7,30,73,4,151,15,1151,30,15,30,6,1151000
+bhacaz,docs-as-code-confluence,utilities,49,30,1,9,20,1,39,4,5316,19,3,12,0,5316000
+chocobo1,setup-ccache-action,utilities,83,30,1,30,4,2,13,2,13895,20,1,9,0,13895000
+circleci-public,trigger-circleci-pipeline-action,deployment,36,30,13,10,43,13,49,15,447,30,21,30,5,447000

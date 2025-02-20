@@ -1,13 +1,16 @@
 import json
 import base64
 from typing import Dict, List, Optional
-from .github_api import GitHubAPI
+from src.github_api import GitHubAPI
 
 class DependencyAnalyzer:
     def __init__(self, github_api: GitHubAPI):
         self.github_api = github_api
 
     def get_package_json(self, owner: str, repo: str) -> Optional[Dict]:
+        """
+        Obtiene el archivo package.json de un repositorio.
+        """
         url = f"https://api.github.com/repos/{owner}/{repo}/contents/package.json"
         content = self.github_api.get_json(url)
         if content and 'content' in content:
@@ -15,6 +18,9 @@ class DependencyAnalyzer:
         return None
 
     def get_dependencies_from_package(self, package_json: Dict) -> List[Dict]:
+        """
+        Extrae las dependencias de package.json.
+        """
         dependencies = []
         for name, version in package_json.get('dependencies', {}).items():
             dependencies.append({'name': name, 'version': version, 'type': 'production'})
@@ -25,6 +31,9 @@ class DependencyAnalyzer:
         return dependencies
 
     def analyze_repository(self, owner: str, repo: str) -> Dict:
+        """
+        Analiza un repositorio y devuelve sus dependencias en JSON.
+        """
         result = {
             'repository': f"{owner}/{repo}",
             'dependencies': [],

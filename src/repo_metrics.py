@@ -1,7 +1,7 @@
 import requests
 import time
 from typing import Dict, Optional
-from .config import GITHUB_TOKEN
+from src.config import GITHUB_TOKEN
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 REST_API_URL = "https://api.github.com"

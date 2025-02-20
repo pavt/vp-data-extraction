@@ -1,7 +1,7 @@
 import time
 import pandas as pd
 from tqdm import tqdm
-from .repo_metrics import RepoMetrics
+from src.repo_metrics import RepoMetrics
 
 class BatchRepoMetrics:
     """

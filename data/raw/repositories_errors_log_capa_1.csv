@@ -1,0 +1,3 @@
+repo_owner,repo_name,error
+circleci-public,trigger-circleci-pipeline-action,❌ Respuesta vacía de la API
+circleci-public,trigger-circleci-pipeline-action,❌ No se obtuvieron métricas

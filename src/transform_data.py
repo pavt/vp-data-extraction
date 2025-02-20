@@ -5,14 +5,7 @@ from tqdm import tqdm
 def transform_dependencies_to_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     Convierte la columna 'dependencies_json' en columnas individuales para cada dependencia.
-
-    Args:
-        df (pd.DataFrame): DataFrame con la columna 'dependencies_json'.
-
-    Returns:
-        pd.DataFrame: DataFrame con nuevas columnas representando la presencia de cada dependencia.
     """
-
     print("🔍 Transformando dependencias en columnas...")
 
     def get_dep_names_set(json_str):
