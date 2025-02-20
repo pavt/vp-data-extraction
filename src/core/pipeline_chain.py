@@ -1,30 +1,29 @@
-from abc import ABC, abstractmethod
-from src.utils.logger import logger
+from src.core.pipeline_step import PipelineStep
 
-class PipelineStep(ABC):
+class PipelineChain:
     """
-    Clase base abstracta para definir pasos en el pipeline.
+    Gestiona la ejecución secuencial de los pasos del pipeline.
     """
 
-    def __init__(self, next_step=None):
-        self.next_step = next_step
+    def __init__(self):
+        self.first_step = None
+        self.last_step = None
 
-    @abstractmethod
-    def process(self, df):
+    def add_step(self, step: PipelineStep):
         """
-        Método que debe implementarse en cada paso del pipeline.
+        Agrega un paso al pipeline y lo encadena correctamente.
         """
-        pass
+        if self.first_step is None:
+            self.first_step = step
+        else:
+            self.last_step.next_step = step
+        self.last_step = step
 
-    def execute(self, df):
+    def run(self, df):
         """
-        Ejecuta el paso actual y, si hay un siguiente paso, lo ejecuta.
+        Ejecuta el pipeline desde el primer paso.
         """
-        try:
-            df = self.process(df)
-            if self.next_step:
-                return self.next_step.execute(df)
-            return df
-        except Exception as e:
-            logger.error(f"❌ Error en {self.__class__.__name__}: {e}")
-            return df  # Continúa con el pipeline aunque haya errores
+        if self.first_step:
+            return self.first_step.execute(df)
+        else:
+            raise RuntimeError("No hay pasos en el pipeline.")
