@@ -2,6 +2,7 @@ import requests
 import time
 from typing import Dict, Optional
 from src.config import GITHUB_TOKEN
+from src.utils.logger import logger  # ✅ Importar el logger
 
 GRAPHQL_URL = "https://api.github.com/graphql"
 REST_API_URL = "https://api.github.com"
@@ -37,7 +38,7 @@ class RepoMetrics:
                         break
                 url = next_url  # Continuar con la siguiente página
             else:
-                print(f"⚠️ Error obteniendo datos: {response.status_code}")
+                logger.error(f"⚠️ Error obteniendo datos paginados: {response.status_code} - {response.text}")
                 break
         return results
 
@@ -47,7 +48,12 @@ class RepoMetrics:
         """
         try:
             repo_url = f"{REST_API_URL}/repos/{owner}/{repo}"
-            repo_data = requests.get(repo_url, headers=self.headers).json()
+            response = requests.get(repo_url, headers=self.headers)
+            if response.status_code != 200:
+                logger.warning(f"⚠️ No se pudo obtener repo {owner}/{repo}: {response.status_code}")
+                return {}
+
+            repo_data = response.json()
 
             languages_url = f"{REST_API_URL}/repos/{owner}/{repo}/languages"
             languages_data = self.fetch_paginated_data(languages_url)
@@ -58,7 +64,7 @@ class RepoMetrics:
                 "languages": languages_data  # ✅ Ahora obtenemos TODOS los lenguajes
             }
         except Exception as e:
-            print(f"⚠️ Error obteniendo datos REST para {owner}/{repo}: {e}")
+            logger.error(f"⚠️ Error obteniendo datos REST para {owner}/{repo}: {e}")
             return {}
 
     def get_repo_metrics(self, owner: str, repo: str) -> Optional[Dict]:
@@ -89,11 +95,11 @@ class RepoMetrics:
             data = response.json()
 
             if "errors" in data:
-                print(f"⚠️ GraphQL Error en {owner}/{repo}: {data['errors']}")
+                logger.warning(f"⚠️ GraphQL Error en {owner}/{repo}: {data['errors']}")
                 return None
 
             if "data" not in data or data["data"]["repository"] is None:
-                print(f"⚠️ No hay datos para {owner}/{repo}")
+                logger.warning(f"⚠️ No hay datos para {owner}/{repo}")
                 return None
 
             repo_data = data["data"]["repository"]
@@ -123,5 +129,5 @@ class RepoMetrics:
             return metrics
 
         except Exception as e:
-            print(f"⚠️ Error procesando {owner}/{repo}: {e}")
+            logger.error(f"⚠️ Error procesando {owner}/{repo}: {e}")
             return None
