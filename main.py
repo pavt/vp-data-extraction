@@ -1,23 +1,23 @@
 import pandas as pd
 from src.config import GITHUB_TOKEN
-from src.github_api import GitHubAPI
-from src.dependency_analyzer import DependencyAnalyzer
-from src.batch_processor import BatchProcessor
-from src.transform_data import transform_dependencies_to_columns
+from src.repo_metrics import RepoMetrics
+from src.batch_repo_metrics import BatchRepoMetrics
 
 if __name__ == "__main__":
-    df = pd.read_csv('data/github_repo_metrics_final.csv')
-    df = df.drop(columns=['labels', 'topics', 'Low', 'Medium', 'High', 'Critical', 'Total Vulnerabilities', 'CWE Tags', 'vulnerability-proneness-all'])
+    print("🚀 Iniciando análisis de repositorios...")
 
-    github_api = GitHubAPI(GITHUB_TOKEN)
-    analyzer = DependencyAnalyzer(github_api)
-    processor = BatchProcessor(analyzer)
-    df_with_deps = processor.process_dataframe(df)
+    df = pd.read_csv("data/repos_dependencies_matrix.csv")
 
-    df_final = transform_dependencies_to_columns(df_with_deps)
-    df_final.to_csv('data/repos_dependencies_matrix.csv', index=False)
+    # Inicializar clases
+    repo_metrics = RepoMetrics(GITHUB_TOKEN)
+    batch_processor = BatchRepoMetrics(repo_metrics)
 
-    print("Resumen final:")
-    print(f"Total repositorios procesados: {len(df_final)}")
-    print(f"Total dependencias únicas: {len([col for col in df_final.columns if col.startswith('dep_')])}")
-    print(f"Repositorios con errores: {len(df_final[df_final['dep_error'].notna()])}")
+    # Procesar repositorios
+    df_with_metrics = batch_processor.update_repository_metrics(df)
+
+    # Guardar resultados
+    df_with_metrics.to_csv("data/github_repos_with_languages.csv", index=False)
+
+    print(f"✅ Archivo actualizado: {len(df_with_metrics)} repos analizados.")
+    lang_cols = [col for col in df_with_metrics.columns if col.startswith('lang_')]
+    print(f"🗂 Total lenguajes detectados: {len(lang_cols)}")
