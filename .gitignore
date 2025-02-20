@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+*.env
+*.venv
+
+# Logs and temp files
+logs/
+*.log
+*.out
+*.pid
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Data files
+data/*.csv
+data/*.json
+
+# Ignore VSCode settings
+.vscode/
+
+
+# Ignore environment variables file
+.env
