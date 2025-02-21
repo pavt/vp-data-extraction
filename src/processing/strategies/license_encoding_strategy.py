@@ -16,7 +16,9 @@ class LicenseEncodingStrategy(ProcessingStrategy):
         # Inicializar todas las nuevas columnas con 0
         for license in all_licenses:
             col_name = f"license_{license.replace(' ', '_').replace('-', '_')}"
-            df[col_name] = 0
+            #df[col_name] = 0
+            new_column = pd.DataFrame({col_name: 0}, index=df.index)
+            df = pd.concat([df, new_column], axis=1)
 
         # Llenar las columnas con 1 si la licencia está presente
         for index, row in df.iterrows():

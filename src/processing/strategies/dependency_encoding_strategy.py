@@ -26,8 +26,10 @@ class DependencyEncodingStrategy(ProcessingStrategy):
         # Inicializar todas las nuevas columnas con 0
         for dep in all_dependencies:
             col_name = f"dep_{dep.replace('@', '').replace('/', '_')}"  # Evitar caracteres inválidos
-            df[col_name] = 0
-
+            #df[col_name] = 0
+            new_column = pd.DataFrame({col_name: 0}, index=df.index)
+            df = pd.concat([df, new_column], axis=1)
+    
         # Llenar las columnas con 1 si la dependencia está presente
         for index, row in df.iterrows():
             try:
