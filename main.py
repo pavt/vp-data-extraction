@@ -8,6 +8,6 @@ from src.core.pipeline_manager import PipelineManager  # ✅ Corrección
 
 if __name__ == "__main__":
     pipeline = PipelineManager(
-        raw_data_path="data/raw/repositories_raw_data.csv"  # ✅ Solo necesitamos el raw
+        raw_data_path="data/raw/repositories_raw_data_test.csv"  # ✅ Solo necesitamos el raw
     )
     pipeline.run()
