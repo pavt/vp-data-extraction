@@ -29,11 +29,12 @@ class DataManager:
         df = pd.read_csv(self.input_filepath)
 
         # Columnas a eliminar (verifica si existen antes de eliminarlas)
-        cols_to_drop = [
-            'labels', 'topics', 'Low', 'Medium', 'High', 'Critical', 
-            'Total Vulnerabilities', 'CWE Tags', 'vulnerability-proneness-all'
-        ]
-        df.drop(columns=[col for col in cols_to_drop if col in df.columns], inplace=True)
+        #cols_to_drop = [
+        #    'labels', 'topics', 'Low', 'Medium', 'High', 'Critical', 
+        #    'Total Vulnerabilities', 'CWE Tags', 'vulnerability-proneness-all'
+        # ]
+
+        #df.drop(columns=[col for col in cols_to_drop if col in df.columns], inplace=True)
 
         return df
 
