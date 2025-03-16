@@ -1,0 +1,26 @@
+Model,Feature Set,F1-score,Accuracy,ROC-AUC,Precision,Recall
+RandomForest,repo_meta,0.566,0.593,0.569,0.563,0.571
+RandomForest,repo_activity,0.524,0.579,0.576,0.553,0.500
+RandomForest,dependency_only,0.578,0.642,0.685,0.659,0.521
+RandomForest,all_but_text,0.915,0.922,0.980,0.937,0.896
+RandomForest,full_features,0.872,0.887,0.964,0.930,0.824
+XGBoost,repo_meta,0.500,0.549,0.534,0.516,0.487
+XGBoost,repo_activity,0.430,0.510,0.527,0.466,0.406
+XGBoost,dependency_only,0.602,0.652,0.683,0.652,0.563
+XGBoost,all_but_text,1.000,1.000,1.000,1.000,1.000
+XGBoost,full_features,1.000,1.000,1.000,1.000,1.000
+SVM,repo_meta,0.000,0.520,0.554,0.000,0.000
+SVM,repo_activity,0.040,0.539,0.554,0.400,0.021
+SVM,dependency_only,0.541,0.618,0.705,0.629,0.489
+SVM,all_but_text,0.000,0.529,0.509,0.000,0.000
+SVM,full_features,0.000,0.529,0.509,0.000,0.000
+NaiveBayes,repo_meta,0.477,0.613,0.597,0.686,0.374
+NaiveBayes,repo_activity,0.521,0.584,0.622,0.568,0.521
+NaiveBayes,dependency_only,0.522,0.623,0.607,0.661,0.438
+NaiveBayes,all_but_text,0.267,0.539,0.582,0.692,0.273
+NaiveBayes,full_features,0.267,0.539,0.582,0.692,0.273
+LogisticRegression,repo_meta,0.515,0.583,0.575,0.576,0.469
+LogisticRegression,repo_activity,0.566,0.599,0.624,0.572,0.562
+LogisticRegression,dependency_only,0.625,0.662,0.705,0.652,0.605
+LogisticRegression,all_but_text,0.640,0.471,0.607,0.471,1.000
+LogisticRegression,full_features,0.640,0.471,0.607,0.471,1.000

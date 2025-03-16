@@ -1,0 +1,6 @@
+Model,Feature Set,F1-score,Accuracy,ROC-AUC,Precision,Recall
+XGBoost,repo_meta,0.378,0.594,0.627,0.657,0.271
+XGBoost,repo_activity,0.426,0.584,0.604,0.596,0.333
+XGBoost,dependency_only,0.498,0.593,0.660,0.600,0.447
+XGBoost,all_but_text,1.000,1.000,1.000,1.000,1.000
+XGBoost,full_features,1.000,1.000,1.000,1.000,1.000
